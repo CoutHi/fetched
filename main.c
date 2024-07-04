@@ -106,7 +106,7 @@ int main() {
     printf("Kernel Version: %s\n", kernel);
 
     // Execute command to get disk usage information
-    char* disk_usage_result = execute_command("df -h /");
+    char* disk_usage_result = execute_command("df -h --output=source,target,used,size");
     if (disk_usage_result == NULL) {
         printf("Failed to retrieve disk usage information.\n");
         free(command);
@@ -117,21 +117,7 @@ int main() {
     }
 
     // Print disk usage information for / 
-    printf("Disk Usage: \n%s\n", disk_usage_result);
-
-    // Execute command to get disk usage information for /home
-    char* home_disk_usage_result = execute_command("du -h /home");
-    if (home_disk_usage_result == NULL) {
-        printf("Failed to retrieve disk usage information for /home.\n");
-        free(command);
-        free(distro);
-        free(result);
-        free(kernel);
-        return 1;
-    }
-
-    // Print disk usage information for /home
-    printf("\nDisk Usage in /home:\n%s\n\n", home_disk_usage_result);
+    printf("Disk Usage: \n\n%s\n\n", disk_usage_result);
 
     // Extract URLs
     char* distro_url = malloc(sizeof(char) * 256);
