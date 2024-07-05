@@ -120,6 +120,18 @@ int main() {
     // Print disk usage information for / 
     printf("Disk Usage: \n%s\n", disk_usage_result);
 
+    // Memory usage
+    char* mem_usage = execute_command("free -h | grep Mem | awk '{print $3, $2}'");
+    if (mem_usage == NULL){
+        printf("Failed to retrieve memory usage information.\n");
+        free(command);
+        free(distro);
+        free(result);
+        free(kernel);
+        return 1;
+    }
+    printf("Memory usage: %s", mem_usage);
+
     // Extract URLs
     char* distro_url = malloc(sizeof(char) * 256);
     malloc_check(distro_url, "Distro_URL");
