@@ -1,0 +1,1 @@
+As I haven't set up a discussions page yet, you can create a new issue if you want to discuss the feature and it's implementation you plan on doing. This is important to do before working on it and opening a pull request to ensure we're all on the same page, nobody wastes time and no two people are working on the same feature when there is no need to do so.
