@@ -178,6 +178,18 @@ int main() {
     // Get the amount of packages from the normal package manager
     // TODO, Make a switch case that gets the amount of packages based on the distribution and the distribution's package manager commands.
 
+    // Get SHELL information
+    char* shell = execute_command("echo $SHELL");
+    if(shell == NULL){
+        printf("Failed to retrieve SHELL information.\n");
+        free(command);
+        free(distro);
+        free(result);
+        free(kernel);
+        return 1;
+    }
+    printf("Shell: %s\n",shell);
+
     // Extract URLs
     char* distro_url = malloc(sizeof(char) * 256);
     malloc_check(distro_url, "Distro_URL");
