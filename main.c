@@ -110,6 +110,25 @@ int main() {
     printf("Documentation: %s\n", documentation);
     free(documentation);
 
+    // Execute command to get terminal emulator information
+    char* terminal_info = execute_command("echo $TERM"); //Alternative `update-alternatives --display x-terminal-emulator | grep currently`
+    if (terminal_info == NULL) {
+        printf("Failed to retrieve terminal emulator information.\n");
+    } else {
+        // Print terminal emulator information
+        printf("Terminal Emulator:\n%s\n", terminal_info);
+        free(terminal_info);
+    }
+
+    char* uptime_info = execute_command("uptime -p"); // Alternative `w` or `cat /proc/uptime` or `systemctl status | grep Since`
+    if (uptime_info == NULL) {
+        printf("Failed to retrieve system uptime information.\n");
+    } else {
+        // Print system uptime information
+        printf("System Uptime:\n%s\n", uptime_info);
+        free(uptime_info);
+    }
+
     // Extract image name
     command[0] = '\0';
     char* image = malloc(sizeof(char) * 64);
