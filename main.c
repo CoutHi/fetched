@@ -1,8 +1,46 @@
-
 #define _POSIX_C_SOURCE 2
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+void malloc_check(void* x, const char* msg) {
+    if (x == NULL) {
+        printf("Memory Allocation failed for %s\n", msg);
+        exit(1);
+    }
+}
+
+char* packages_pacman(const char* command){
+    FILE* fp = popen(command, "r");
+    if (fp == NULL){
+        printf("Couldn't open the command for pacman!");
+        return NULL;
+    }
+
+    char* result = malloc(sizeof(char)*512);
+    malloc_check(result, "Pacman Result");
+
+    if (result == NULL){
+        printf("Command failed to execute for pacman!");
+        return NULL;
+    }
+
+    int c;
+    int i = 0;
+    while ((c = fgetc(fp)) != EOF && i < 1023) {
+        result[i] = (char)c;
+        i++;
+    }
+    result[i] = '\0';
+
+    if (pclose(fp) == -1) {
+        perror("pclose failed");
+        free(result);
+        return NULL;
+    }
+
+    return result;
+}
 
 void print_spaces() {
     char d = ' ';
@@ -32,13 +70,6 @@ void find_string(char* dest, char* source, const char* string, int buffer_size) 
     }
 
     dest[c] = '\0';
-}
-
-void malloc_check(void* x, const char* msg) {
-    if (x == NULL) {
-        printf("Memory Allocation failed for %s\n", msg);
-        exit(1);
-    }
 }
 
 char* execute_command(const char* command) {
@@ -117,7 +148,7 @@ int main() {
         return 1;
     }
 
-    // Print disk usage information for / 
+    // Print disk usage information for  
     printf("Disk Usage: \n%s\n", disk_usage_result);
 
     // Memory usage
@@ -131,6 +162,21 @@ int main() {
         return 1;
     }
     printf("Memory usage: %s", mem_usage);
+
+    // Get the amount of flatpak packages
+    char* flatpak_packages = execute_command("flatpak list --app | wc -l");
+    if(flatpak_packages == NULL){
+        printf("Failed to retrieve flatpak information.\n");
+        free(command);
+        free(distro);
+        free(result);
+        free(kernel);
+        return 1;
+    }
+    printf("Flatpak: %s\n",flatpak_packages);
+
+    // Get the amount of packages from the normal package manager
+    // TODO, Make a switch case that gets the amount of packages based on the distribution and the distribution's package manager commands.
 
     // Extract URLs
     char* distro_url = malloc(sizeof(char) * 256);
