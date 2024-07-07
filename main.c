@@ -161,6 +161,7 @@ int main() {
     
     // Function to make every letter in the String uppercase after a space.
     }else{
+        i = 0;
         char ch; 
         cpu_info[i] = toupper(cpu_info[i]);
         for(i = 0; i < strlen(cpu_info); i++){
