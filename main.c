@@ -32,6 +32,26 @@ int main() {
 
     // Print distribution details
     printf("Distribution: %s\n", distro);
+    
+    // Extract image name
+    command[0] = '\0';
+    char* image = malloc(sizeof(char) * 64);
+    malloc_check(image, "Image");
+
+    i = 0;
+    c = 0;
+    while ((distro[i] != '-' && distro[i] != ' ') && i < 63) {
+        image[c] = distro[i];
+        i++;
+        c++;
+    }
+    image[c] = '\0';
+
+    // Display image using 'chafa' (you may need to adjust this based on your setup)
+    snprintf(command, 512, "chafa --view-size 52x52 ./images/%s-linux.png", image);
+    system(command);
+    free(image);
+    free(distro);
 
     // Execute command to get kernel version
     command[0] = '\0';
@@ -39,7 +59,6 @@ int main() {
     char* kernel = execute_command(command);
     if (kernel == NULL) {
         free(command);
-        free(distro);
         free(result);
         return 1;
     }
@@ -52,7 +71,6 @@ int main() {
     if (disk_usage_result == NULL) {
         printf("Failed to retrieve disk usage information.\n");
         free(command);
-        free(distro);
         free(result);
         free(kernel);
         return 1;
@@ -66,7 +84,6 @@ int main() {
     if (mem_usage == NULL){
         printf("Failed to retrieve memory usage information.\n");
         free(command);
-        free(distro);
         free(result);
         free(kernel);
         return 1;
@@ -78,7 +95,6 @@ int main() {
     if(flatpak_packages == NULL){
         printf("Failed to retrieve flatpak information.\n");
         free(command);
-        free(distro);
         free(result);
         free(kernel);
         return 1;
@@ -93,7 +109,6 @@ int main() {
     if(shell == NULL){
         printf("Failed to retrieve SHELL information.\n");
         free(command);
-        free(distro);
         free(result);
         free(kernel);
         return 1;
@@ -139,7 +154,6 @@ int main() {
     char* cpu_info = execute_command("grep -m1 \"model name\" /proc/cpuinfo && grep -m1 \"cpu cores\" /proc/cpuinfo");
     if(cpu_info == NULL){
         printf("Failed to retrieve CPU information!");
-        free(distro);
         free(command);
         free(result);
         free(kernel);
@@ -158,31 +172,11 @@ int main() {
         printf("%s",cpu_info);
         free(cpu_info);
     }
-
-    // Extract image name
-    command[0] = '\0';
-    char* image = malloc(sizeof(char) * 64);
-    malloc_check(image, "Image");
-
-    i = 0;
-    c = 0;
-    while ((distro[i] != '-' && distro[i] != ' ') && i < 63) {
-        image[c] = distro[i];
-        i++;
-        c++;
-    }
-    image[c] = '\0';
-
-    // Display image using 'chafa' (you may need to adjust this based on your setup)
-    snprintf(command, 512, "chafa --view-size 52x52 ./images/%s-linux.png", image);
-    system(command);
-
+    
     // Free allocated memory
     free(command);
-    free(distro);
     free(result);
     free(kernel);
-    free(image);
     free(disk_usage_result);
 
     return 0;
