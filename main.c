@@ -1,10 +1,15 @@
 #define _POSIX_C_SOURCE 2
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "custom_functions.h"
 
 int main() {
+
+    int i = 0;
+    int c = 0;
+
     // Execute command to get Linux distribution details
     char* command = malloc(sizeof(char) * 512);
     malloc_check(command, "Command");
@@ -129,13 +134,38 @@ int main() {
         free(uptime_info);
     }
 
+    // CPU Information
+    printf("CPU INFORMATION:\n================\n");
+    char* cpu_info = execute_command("grep -m1 \"model name\" /proc/cpuinfo && grep -m1 \"cpu cores\" /proc/cpuinfo");
+    if(cpu_info == NULL){
+        printf("Failed to retrieve CPU information!");
+        free(distro);
+        free(command);
+        free(result);
+        free(kernel);
+        free(disk_usage_result);
+    
+    // Function to make every letter in the String uppercase after a space.
+    }else{
+        char ch; 
+        cpu_info[i] = toupper(cpu_info[i]);
+        for(i = 0; i < strlen(cpu_info); i++){
+            if(cpu_info[i] == ' ' || cpu_info[i] == '\n'){
+                ch = cpu_info[i+1];
+                cpu_info[i+1] = toupper(ch);
+            }
+        }
+        printf("%s",cpu_info);
+        free(cpu_info);
+    }
+
     // Extract image name
     command[0] = '\0';
     char* image = malloc(sizeof(char) * 64);
     malloc_check(image, "Image");
 
-    int i = 0;
-    int c = 0;
+    i = 0;
+    c = 0;
     while ((distro[i] != '-' && distro[i] != ' ') && i < 63) {
         image[c] = distro[i];
         i++;

@@ -11,20 +11,20 @@ NOTE: The system wide version is as of yet not functional, it won't cause any bi
 
 ## Roadmap
 - More extensive information about the system.
-    - Disk usage [DONE]
-    - Desktop Environment
-    - Ram usage
-    - Shell
-    - Number of packages
-    - Overview of the basic commands for the package manager
-    - GPU
-    - CPU
-    - Locale
-    - Theme
-    - Icon Theme
-    - Terminal
-    - Bluetooth Devices
-    - Uptime
+    - [x] Disk usage 
+    - [] Desktop Environment
+    - [x] Ram usage
+    - [x] Shell
+    - [] Number of packages
+    - [] Overview of the basic commands for the package manager
+    - [] GPU
+    - [x] CPU
+    - [] Locale
+    - [] Theme
+    - [] Icon Theme
+    - [x] Terminal
+    - [] Bluetooth Devices
+    - [x] Uptime
 - Formatting the output.
 - Optimizing for speed.
 - Customization options.
