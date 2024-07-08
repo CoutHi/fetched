@@ -5,9 +5,13 @@ fetchme will hopefully become a simple program written in C to get information a
 
 ## Usage
 After you clone the repository, move into the fetchme folder and run the command: 
+
 `sudo make install`
-This will create two binaries in the /usr/bin directory, namely the fetchme and asciify binaries.
+
+This will create two binaries in the /usr/bin directory, namely the fetchme and asciify binaries and a folder for fetchme in /usr/share.
+
 You can now run the command from anywhere and if you want to uninstall the program, move once again into the repository folder and run the command:
+
 `sudo make uninstall`
 
 ## Roadmap
