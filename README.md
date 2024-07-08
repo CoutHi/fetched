@@ -17,7 +17,7 @@ NOTE: The system wide version is as of yet not functional, it won't cause any bi
     - [x] Shell
     - [x] Number of packages
     - Overview of the basic commands for the package manager
-    - GPU
+    - [x] GPU
     - [x] CPU
     - Locale
     - Theme
