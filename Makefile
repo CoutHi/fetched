@@ -13,6 +13,6 @@ install:
 	$(CC) ascii.c $(INCLUDEFLAGS) -o $(BINARY2)
 	./move_to_path.sh
 
-clean:
+uninstall:
 	rm -f $(BINARY1) $(BINARY2) 
 	./remove_from_path.sh
