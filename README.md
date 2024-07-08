@@ -14,6 +14,9 @@ You can now run the command from anywhere and if you want to uninstall the progr
 
 `sudo make uninstall`
 
+If you have made changes to the source code and would like to compile it, but you don't want it to be a global command, run:
+
+`make`
 ## Roadmap
 - More extensive information about the system.
     - [x] Disk usage 
