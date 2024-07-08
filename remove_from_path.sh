@@ -1,2 +1,2 @@
-rm /usr/bin/fetchme /usr/bin/asciify
-rm -fr /usr/share/fetchme
+rm /usr/bin/fetched /usr/bin/ascii_me
+rm -fr /usr/share/fetched

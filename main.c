@@ -7,6 +7,8 @@
 #include "custom_functions.h"
 #include "package_functions.h"
 
+#define PROJECT_DIR "/usr/share/fetched/"
+
 int main() {
 
     int i = 0;
@@ -78,8 +80,8 @@ int main() {
     printf("Documentation: %s\n", documentation);
     free(documentation);
     
-    // Display image using 'chafa' (you may need to adjust this based on your setup)
-    snprintf(command, 512, "./asciify ./images/%s-linux.png 70 35", image);
+    // Display image using ascii conversion
+    snprintf(command, 512, "asciify %s/images/%s-linux.png 70 35", PROJECT_DIR,image);
     system(command);
     free(image);
     free(distro);

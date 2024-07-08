@@ -1,3 +1,3 @@
-cp ./fetchme ./asciify /usr/bin/
-mkdir -p /usr/share/fetchme
-cp -r ./images /usr/share/fetchme/
+cp ./fetched ./ascii_me /usr/bin/
+mkdir -p /usr/share/fetched
+cp -r ./images /usr/share/fetched/
