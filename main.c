@@ -183,7 +183,7 @@ int main() {
     if(cpu_info == NULL){
         printf("Failed to retrieve CPU information!");
         free(command);
-    
+        free(cpu_info);
     // Function to make every letter in the String uppercase after a space.
     }else{
         i = 0;
@@ -198,6 +198,36 @@ int main() {
         printf("%s",cpu_info);
         free(cpu_info);
     }
+
+    // Get GPU Information
+    char* gpu_info = execute_command("lspci | grep VGA");
+    if(gpu_info == NULL){
+        printf("Failed to retrieve GPU information!");
+        free(command);
+        free(gpu_info);
+    }
+    else{
+        char* formatted_gpu;
+        formatted_gpu = malloc(sizeof(char)*128);
+        malloc_check(formatted_gpu, "formatted_gpu");
+
+        i = 0;
+        c = 0;
+        while(gpu_info[i] != '['){
+            i++;
+        }
+        i++;
+        while(gpu_info[i] != ']'){
+            formatted_gpu[c] = gpu_info[i];
+            i++;
+            c++;
+        }
+        formatted_gpu[c] = '\0';
+
+        printf("\nGPU Information:\n================\n%s",formatted_gpu);
+        free(gpu_info);
+        free(formatted_gpu);
+    }
     
     // Get Desktop Environment
     char* desktop_env = execute_command("echo $XDG_CURRENT_DESKTOP");
@@ -207,7 +237,7 @@ int main() {
         free(desktop_env);
     }
     else{
-        printf("Desktop Environment: %s",desktop_env);
+        printf("\nDesktop Environment: %s",desktop_env);
         free(desktop_env);
     }
     
