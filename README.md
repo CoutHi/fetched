@@ -15,7 +15,7 @@ NOTE: The system wide version is as of yet not functional, it won't cause any bi
     - Desktop Environment
     - [x] Ram usage
     - [x] Shell
-    - Number of packages
+    - [x] Number of packages
     - Overview of the basic commands for the package manager
     - GPU
     - [x] CPU
