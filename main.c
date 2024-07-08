@@ -79,7 +79,7 @@ int main() {
     free(documentation);
     
     // Display image using 'chafa' (you may need to adjust this based on your setup)
-    snprintf(command, 512, "chafa --view-size 52x52 ./images/%s-linux.png", image);
+    snprintf(command, 512, "chafa -s 20x20 ./images/%s-linux.png", image);
     system(command);
     free(image);
     free(distro);
