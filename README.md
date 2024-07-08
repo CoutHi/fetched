@@ -4,6 +4,10 @@ This project just got started and it's still in infancy. The pretty fonts and th
 fetchme will hopefully become a simple program written in C to get information about your system on Linux and display it in manner worthy of r/unixporn. 
 
 ## Usage
+The command to run the program:
+
+`fetched`
+
 After you clone the repository, move into the fetchme folder and run the command: 
 
 `sudo make install`
