@@ -12,7 +12,7 @@ NOTE: The system wide version is as of yet not functional, it won't cause any bi
 ## Roadmap
 - More extensive information about the system.
     - [x] Disk usage 
-    - Desktop Environment
+    - [x] Desktop Environment
     - [x] Ram usage
     - [x] Shell
     - [x] Number of packages
@@ -23,6 +23,7 @@ NOTE: The system wide version is as of yet not functional, it won't cause any bi
     - Theme
     - Icon Theme
     - [x] Terminal
+    - [x] Session Type
     - Bluetooth Devices
     - [x] Uptime
 - Formatting the output.

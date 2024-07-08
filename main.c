@@ -229,6 +229,7 @@ int main() {
         free(formatted_gpu);
     }
     
+    printf("\n\nDesktop:\n===================\n");
     // Get Desktop Environment
     char* desktop_env = execute_command("echo $XDG_CURRENT_DESKTOP");
     if(desktop_env == NULL){
@@ -237,10 +238,15 @@ int main() {
         free(desktop_env);
     }
     else{
-        printf("\nDesktop Environment: %s",desktop_env);
+        printf("Desktop Environment: %s",desktop_env);
         free(desktop_env);
     }
     
+    // X11 or Wayland?
+    char* session_type = execute_command("echo $XDG_SESSION_TYPE");
+    malloc_check(session_type, "session_type");
+    printf("Session Type: %s\n",session_type);
+    free(session_type);
     // Free allocated memory
     free(command);
 
