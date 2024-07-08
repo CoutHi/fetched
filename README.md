@@ -36,7 +36,7 @@ If you have made changes to the source code and would like to compile it, but yo
     - Icon Theme
     - [x] Terminal
     - [x] Session Type
-    - Bluetooth Devices
+    - [x]Bluetooth Devices
     - [x] Uptime
 - Formatting the output.
 - Optimizing for speed.
