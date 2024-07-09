@@ -254,7 +254,7 @@ int main() {
 
     // Get Bluetooth devices 
     printf("\nBluetooth Devices:\n===================\n");
-    char* bluetooth_devices = execute_command("bluetoothctl paired-devices | grep Device | awk '{for (i=3; i<=NF; i++) printf $i \" \"; print \"\"}'"); 
+    char* bluetooth_devices = execute_command("bluetoothctl"); 
     if (bluetooth_devices == NULL) {
         printf("Failed to retrieve Bluetooth devices information.\n");
     } else {
