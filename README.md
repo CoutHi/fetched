@@ -21,6 +21,9 @@ You can now run the command from anywhere and if you want to uninstall the progr
 If you have made changes to the source code and would like to compile it, but you don't want it to be a global command, run:
 
 `make`
+
+You'll need the package `stb` which may be named differently on different distributions. Look for something along the lines of `stb` or `libstb` or similar.
+
 ## Roadmap
 - More extensive information about the system.
     - [x] Disk usage 
