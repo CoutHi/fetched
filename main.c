@@ -90,7 +90,7 @@ int main() {
     free(documentation);
     
     // Display image using ascii conversion
-    snprintf(command, 512, "ascii_me %s/images/%s-linux.png 70 35", PROJECT_DIR,image);
+    snprintf(command, 512, "ascii_me %simages/%s-linux.png 70 35", PROJECT_DIR,image);
     system(command);
     free(image);
     free(distro);
