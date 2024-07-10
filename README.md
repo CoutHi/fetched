@@ -31,7 +31,7 @@ You'll need the package `stb` which may be named differently on different distri
     - [x] Ram usage
     - [x] Shell
     - [x] Number of packages
-    - Overview of the basic commands for the package manager
+    - [x] Overview of the basic commands for the package manager
     - [x] GPU
     - [x] CPU
     - Locale
