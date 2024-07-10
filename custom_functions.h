@@ -1,3 +1,13 @@
+void underline(){
+    printf("\n");
+    int i = 0;
+    while(i < 25){
+        printf("=");
+        i++;
+    }
+    printf("\n");
+}
+
 void malloc_check(void* x, const char* msg) {
     if (x == NULL) {
         printf("Memory Allocation failed for %s\n", msg);
