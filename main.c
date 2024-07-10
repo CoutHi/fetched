@@ -240,7 +240,7 @@ int main() {
         free(cpu_info);
     // Function to make every letter in the String uppercase after a space.
     }else{
-        i = 0;
+        size_t i = 0;
         char ch; 
         cpu_info[i] = toupper(cpu_info[i]);
         for(i = 0; i < strlen(cpu_info); i++){
@@ -306,6 +306,16 @@ int main() {
     free(session_type);
     // Free allocated memory
     free(command);
+
+    // Get Bluetooth devices 
+    printf("\nBluetooth Devices:\n===================\n");
+    char* bluetooth_devices = execute_command("bluetoothctl devices"); 
+    if (bluetooth_devices == NULL) {
+        printf("Failed to retrieve Bluetooth devices information.\n");
+    } else {
+        printf("%s\n", bluetooth_devices);
+        free(bluetooth_devices);
+    }
 
     return 0;
 }

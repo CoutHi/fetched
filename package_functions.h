@@ -6,10 +6,10 @@ int check_package_manager(){
         return 2; // 2 for DNF
     }
     else if(access("/usr/bin/pacman", X_OK) == 0){
-        return 3;
+        return 3; // 3 for pacman
     }
     else if(access("/usr/bin/zypper", X_OK) == 0){
-        return 4;
+        return 4; // 4 for zypper
     }
     else{
         return 5;

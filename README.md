@@ -39,7 +39,7 @@ You'll need the package `stb` which may be named differently on different distri
     - Icon Theme
     - [x] Terminal
     - [x] Session Type
-    - Bluetooth Devices
+    - [x] Bluetooth Devices
     - [x] Uptime
 - Formatting the output.
 - Optimizing for speed.
