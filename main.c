@@ -308,7 +308,8 @@ int main() {
     free(command);
 
     // Get Bluetooth devices 
-    printf("\nBluetooth Devices:\n===================\n");
+    printf("\nBluetooth Devices:");
+    underline();
     char* bluetooth_devices = execute_command("bluetoothctl devices"); 
     if (bluetooth_devices == NULL) {
         printf("Failed to retrieve Bluetooth devices information.\n");
