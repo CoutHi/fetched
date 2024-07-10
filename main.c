@@ -9,6 +9,14 @@
 
 #define PROJECT_DIR "/usr/share/fetched/"
 
+struct package_manager_commands{
+    char* update;
+    char* install;
+    char* delete;
+    char* search;
+    char* list;
+};
+
 int main() {
 
     int i = 0;
@@ -25,8 +33,8 @@ int main() {
         return 1;
     }
 
-    printf("System Information:\n");
-    printf("===================\n");
+    printf("System Information:");
+    underline();
     // Extract distribution details
     char* distro = malloc(sizeof(char) * 128);
     malloc_check(distro, "Distro");
@@ -63,7 +71,8 @@ int main() {
     }
     image[c] = '\0';
     
-    printf("Help:\n===================\n");
+    printf("Help:");
+    underline();
 
     // Distro URLs
     char* distro_url = malloc(sizeof(char) * 256);
@@ -87,7 +96,8 @@ int main() {
     free(distro);
     free(result);
 
-    printf("Disk And Memory:\n===================\n");
+    printf("Disk And Memory:");
+    underline();
 
     // Execute command to get kernel version
     // Execute command to get disk usage information
@@ -110,7 +120,8 @@ int main() {
     }
     printf("Memory: %s", mem_usage);
 
-    printf("\nPackages:\n===================\n");
+    printf("\nPackages:");
+    underline();
     // Get the amount of flatpak packages
     char* flatpak_packages = execute_command("flatpak list --app | wc -l");
     if(flatpak_packages == NULL){
@@ -151,6 +162,45 @@ int main() {
     }
     free(package_number);
 
+    struct package_manager_commands package_commands;
+    switch(package_manager){
+        case 1:
+            package_commands.update = "sudo apt-get update && sudo apt-get upgrade";
+            package_commands.install = "sudo apt-get install [x]";
+            package_commands.delete = "sudo apt-get remove [x]";
+            package_commands.search = "apt-get search [x]";
+            package_commands.list = "apt-get list --installed";
+            break;
+        case 2:
+            package_commands.update = "sudo dnf update";
+            package_commands.install = "sudo dnf install [x]";
+            package_commands.delete = "sudo dnf remove [x]";
+            package_commands.search = "dnf search [x]";
+            package_commands.list = "dnf list installed";
+            break;
+        case 3:
+            package_commands.update = "sudo pacman -Syu";
+            package_commands.install = "sudo pacman -S [x]";
+            package_commands.delete = "sudo pacman -Rns [x]";
+            package_commands.search = "pacman -Ss [x]";
+            package_commands.list = "pacman -Qq";
+            break;
+        case 4:
+            package_commands.update = "sudo zypper up";
+            package_commands.install = "sudo zypper in [x]";
+            package_commands.delete = "sudo zypper rm [x]";
+            package_commands.search = "zypper se [x]";
+            package_commands.list = "zypper se -i";
+            break;
+        default:
+             break;
+    }
+    printf("\nPackage Manager Commands:");
+    underline();
+    printf("Update: %s\nInstall: %s\nDelete: %s\nSearch: %s\nList: %s\n",package_commands.update,package_commands.install,package_commands.delete,package_commands.search,package_commands.list);
+
+    printf("\nTerminal Environment:");
+    underline();
     // Get SHELL information
     char* shell = execute_command("echo $SHELL");
     if(shell == NULL){
@@ -158,7 +208,7 @@ int main() {
         free(command);
         return 1;
     }
-    printf("Shell: %s\n",shell);
+    printf("Shell: %s",shell);
 
     // Execute command to get terminal emulator information
     char* terminal_info = execute_command("echo $TERM"); //Alternative `update-alternatives --display x-terminal-emulator | grep currently`
@@ -166,7 +216,7 @@ int main() {
         printf("Failed to retrieve terminal emulator information.\n");
     } else {
         // Print terminal emulator information
-        printf("Terminal Emulator:\n%s\n", terminal_info);
+        printf("Emulator:%s\n", terminal_info);
         free(terminal_info);
     }
 
@@ -180,7 +230,9 @@ int main() {
     }
 
     // CPU Information
-    printf("CPU Information:\n================\n");
+    printf("CPU Information:");
+    underline();
+
     char* cpu_info = execute_command("grep -m1 \"model name\" /proc/cpuinfo && grep -m1 \"cpu cores\" /proc/cpuinfo");
     if(cpu_info == NULL){
         printf("Failed to retrieve CPU information!");
@@ -226,12 +278,15 @@ int main() {
         }
         formatted_gpu[c] = '\0';
 
-        printf("\nGPU Information:\n================\n%s",formatted_gpu);
+        printf("\nGPU Information:");
+        underline();
+        printf("Model Name: %s",formatted_gpu);
         free(gpu_info);
         free(formatted_gpu);
     }
     
-    printf("\n\nDesktop:\n===================\n");
+    printf("\n\nDesktop:");
+    underline();
     // Get Desktop Environment
     char* desktop_env = execute_command("echo $XDG_CURRENT_DESKTOP");
     if(desktop_env == NULL){
