@@ -309,7 +309,7 @@ int main() {
 
     // Get Bluetooth devices 
     printf("\nBluetooth Devices:\n===================\n");
-    char* bluetooth_devices = execute_command("bluetoothctl"); 
+    char* bluetooth_devices = execute_command("bluetoothctl devices"); 
     if (bluetooth_devices == NULL) {
         printf("Failed to retrieve Bluetooth devices information.\n");
     } else {
