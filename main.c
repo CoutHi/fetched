@@ -110,7 +110,7 @@ int main() {
     free(documentation);
 
     // Display image using ascii conversion
-    snprintf(command, 512, "ascii_me %simages/%s-linux.png 70 35", PROJECT_DIR,image);
+    snprintf(command, 512, "ascii_me %simages/%s-linux.png 50 25", PROJECT_DIR,image);
     system(command);
     free(image);
     free(distro);
@@ -119,7 +119,6 @@ int main() {
     printf("Disk And Memory:");
     underline();
 
-    // Execute command to get kernel version
     // Execute command to get disk usage information
     char* disk_usage_result = execute_command("df -h --output=source,target,used,size | grep -E '/dev/sd|/dev/nvme|/dev/hd|/dev/mmcb|/dev/mapper|/dev/vgname|/dev/vd|/dev/xvd' | awk '{print \"Disk (\" $2 \"):\", $3, $4, $5}'");
     if (disk_usage_result == NULL) {
