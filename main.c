@@ -23,10 +23,10 @@ int main() {
     int c = 0;
 
     // Execute command to get Linux distribution details
-    char* command = malloc(sizeof(char) * 512);
+    char* command = malloc(sizeof(char) * 4096);
     malloc_check(command, "Command");
 
-    snprintf(command, 512, "cat /etc/*-release");
+    snprintf(command, 4096, "cat /etc/*-release");
     char* result = execute_command(command);
     if (result == NULL) {
         free(command);
@@ -39,7 +39,7 @@ int main() {
     char* distro = malloc(sizeof(char) * 128);
     malloc_check(distro, "Distro");
 
-    find_string(distro, result, "PRETTY_NAME=", 128);
+    find_string(distro, result, "DISTRIB_ID=", 128);
     distro[strlen(distro)] = '\0';
 
     // Print distribution details
@@ -75,18 +75,38 @@ int main() {
     underline();
 
     // Distro URLs
-    char* distro_url = malloc(sizeof(char) * 256);
-    malloc_check(distro_url, "Distro_URL");
+    char* distro_url = execute_command("cat /etc/*-release | grep HOME_URL");
+    malloc_check(distro_url, "distro_url");
 
-    find_string(distro_url, result, "HOME_URL=", 256);
-    printf("URL: %s\n", distro_url);
+    // Loops for printing only the relevant part of the URL strings.
+    i = 0;
+    while(distro_url[i] != '"'){
+        i++;
+    }
+    i++;
+    printf("URL: ");
+
+    while(distro_url[i] != '"'){
+        printf("%c", distro_url[i]);
+        i++;
+    }
+    printf("\n");
     free(distro_url);
 
-    char* documentation = malloc(sizeof(char) * 256);
-    malloc_check(documentation, "Documentation");
+    char* documentation = execute_command("cat /etc/*-release | grep DOCUMENTATION");
+    malloc_check(documentation, "documentation");
 
-    find_string(documentation, result, "DOCUMENTATION_URL=", 256);
-    printf("Documentation: %s\n", documentation);
+    i = 0;
+    while(documentation[i] != '"'){
+        i++;
+    }
+    i++;
+    printf("Documentation URL: ");
+    while(documentation[i] != '"'){
+        printf("%c", documentation[i]);
+        i++;
+    }
+    printf("\n");
     free(documentation);
 
     // Display image using ascii conversion
