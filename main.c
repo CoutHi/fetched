@@ -44,7 +44,7 @@ int main() {
 
     // Print distribution details
     printf("Distribution: %s\n", distro);
-     
+
     // Kernel Information
     command[0] = '\0';
     snprintf(command, 512, "uname -r");
@@ -70,7 +70,7 @@ int main() {
         c++;
     }
     image[c] = '\0';
-    
+
     printf("Help:");
     underline();
 
@@ -88,7 +88,7 @@ int main() {
     find_string(documentation, result, "DOCUMENTATION_URL=", 256);
     printf("Documentation: %s\n", documentation);
     free(documentation);
-    
+
     // Display image using ascii conversion
     snprintf(command, 512, "ascii_me %simages/%s-linux.png 70 35", PROJECT_DIR,image);
     system(command);
@@ -101,7 +101,7 @@ int main() {
 
     // Execute command to get kernel version
     // Execute command to get disk usage information
-    char* disk_usage_result = execute_command("df -h --output=source,target,used,size | grep -E '/dev/sd|/dev/nvme|/dev/hd|/dev/mmcb|/dev/mapper|/dev/vgname|/dev/vd|/dev/xvd' | awk '{print \"Disk (\" $2 \"):\", $3, $4, $5}'");    
+    char* disk_usage_result = execute_command("df -h --output=source,target,used,size | grep -E '/dev/sd|/dev/nvme|/dev/hd|/dev/mmcb|/dev/mapper|/dev/vgname|/dev/vd|/dev/xvd' | awk '{print \"Disk (\" $2 \"):\", $3, $4, $5}'");
     if (disk_usage_result == NULL) {
         printf("Failed to retrieve disk usage information.\n");
         free(command);
@@ -241,7 +241,7 @@ int main() {
     // Function to make every letter in the String uppercase after a space.
     }else{
         size_t i = 0;
-        char ch; 
+        char ch;
         cpu_info[i] = toupper(cpu_info[i]);
         for(i = 0; i < strlen(cpu_info); i++){
             if(cpu_info[i] == ' ' || cpu_info[i] == '\n'){
@@ -284,7 +284,7 @@ int main() {
         free(gpu_info);
         free(formatted_gpu);
     }
-    
+
     printf("\n\nDesktop:");
     underline();
     // Get Desktop Environment
@@ -298,7 +298,7 @@ int main() {
         printf("Desktop Environment: %s",desktop_env);
         free(desktop_env);
     }
-    
+
     // X11 or Wayland?
     char* session_type = execute_command("echo $XDG_SESSION_TYPE");
     malloc_check(session_type, "session_type");
@@ -307,17 +307,18 @@ int main() {
     // Free allocated memory
     free(command);
 
-    // Get Bluetooth devices 
+    /*
+    // Get Bluetooth devices
     printf("\nBluetooth Devices:");
     underline();
-    char* bluetooth_devices = execute_command("bluetoothctl devices"); 
+    char* bluetooth_devices = execute_command("bluetoothctl devices");
     if (bluetooth_devices == NULL) {
         printf("Failed to retrieve Bluetooth devices information.\n");
     } else {
         printf("%s\n", bluetooth_devices);
         free(bluetooth_devices);
     }
+    */
 
     return 0;
 }
-
