@@ -112,21 +112,11 @@ int main() {
     // Display image using ascii conversion
     command[0] = '\0';
     snprintf(command, 512, "ascii_me /usr/share/fetched/images/%s-linux.png 50 25", distro);
-    FILE* fp = popen(command, "r");
-    if(fp == NULL){
-        printf("Couldn't open the command for the ascii art!");
-        return -1;
-    }
-    c = 0;
-    i = 0;
+
     char* ascii = malloc(sizeof(char)*8192);
     malloc_check(ascii, "ascii");
-    while((c = fgetc(fp)) != EOF && i < 8191){
-       ascii[i] = (char)c;
-       i++;
-    }
-    ascii[i] = '\0';
-    pclose(fp);
+
+    ascii = execute_command(command);
 
     printf("%s\n",ascii);
     free(ascii);
