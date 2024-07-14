@@ -23,10 +23,10 @@ int main() {
     int c = 0;
 
     // Execute command to get Linux distribution details
-    char* command = malloc(sizeof(char) * 4096);
+    char* command = malloc(sizeof(char) * 512);
     malloc_check(command, "Command");
 
-    snprintf(command, 4096, "cat /etc/*-release");
+    snprintf(command, 512, "cat /etc/*-release");
     char* result = execute_command(command);
     if (result == NULL) {
         free(command);
@@ -110,8 +110,27 @@ int main() {
     free(documentation);
 
     // Display image using ascii conversion
-    snprintf(command, 512, "ascii_me %simages/%s-linux.png 50 25", PROJECT_DIR,image);
-    system(command);
+    command[0] = '\0';
+    snprintf(command, 512, "ascii_me /usr/share/fetched/images/%s-linux.png 50 25", distro);
+    FILE* fp = popen(command, "r");
+    if(fp == NULL){
+        printf("Couldn't open the command for the ascii art!");
+        return -1;
+    }
+    c = 0;
+    i = 0;
+    char* ascii = malloc(sizeof(char)*8192);
+    malloc_check(ascii, "ascii");
+    while((c = fgetc(fp)) != EOF && i < 8191){
+       ascii[i] = (char)c;
+       i++;
+    }
+    ascii[i] = '\0';
+    pclose(fp);
+
+    printf("%s\n",ascii);
+    free(ascii);
+
     free(image);
     free(distro);
     free(result);
