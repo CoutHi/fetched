@@ -39,7 +39,7 @@ int main() {
     char* distro = malloc(sizeof(char) * 128);
     malloc_check(distro, "Distro");
 
-    find_string(distro, result, "ID=", 128);
+    find_string(distro, result, "PRETTY_NAME=", 128);
     distro[strlen(distro)] = '\0';
 
     // Print distribution details
