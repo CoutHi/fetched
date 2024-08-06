@@ -45,6 +45,22 @@ int main() {
     // Print distribution details
     printf("Distribution: %s\n", distro);
 
+    char* distro_cut = malloc(sizeof(char)*128);
+    malloc_check(distro_cut, "distro_cut");
+
+    i = 0;
+    c = 0;
+
+    while (distro[i] != ' ' && distro[i] != '\0'){
+        distro_cut[c] = distro[i];
+        i++;
+        c++;
+    }
+    distro_cut[c] = '\0';
+
+    i = 0;
+    c = 0;
+
     // Kernel Information
     command[0] = '\0';
     snprintf(command, 512, "uname -r");
@@ -111,7 +127,7 @@ int main() {
 
     // Display image using ascii conversion
     command[0] = '\0';
-    snprintf(command, 512, "ascii_me /usr/share/fetched/images/%s-linux.png 50 25", distro);
+    snprintf(command, 512, "ascii_me /usr/share/fetched/images/%s-linux.png 50 25", distro_cut);
 
     char* ascii = malloc(sizeof(char)*8192);
     malloc_check(ascii, "ascii");
